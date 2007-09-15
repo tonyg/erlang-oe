@@ -67,6 +67,6 @@ def get_erlang_libs(d):
     libs.sort()
     return libs
 
-FILES_${PN}-dbg += " ${libdir}/erlang/bin/.debug ${libdir}/erlang/*/bin/.debug ${libdir}/erlang/lib/*/bin/.debug"
+FILES_${PN}-dbg += " ${libdir}/erlang/bin/.debug ${libdir}/erlang/*/bin/.debug ${libdir}/erlang/lib/*/bin/.debug ${libdir}/erlang/lib/*/priv/bin/.debug ${libdir}/erlang/lib/*/priv/obj/.debug ${libdir}/erlang/lib/*/priv/lib/.debug"
 FILES_${PN}-libs += " ${@' '.join(get_erlang_libs(d))}"
 PACKAGES =+ "${PN}-libs"
