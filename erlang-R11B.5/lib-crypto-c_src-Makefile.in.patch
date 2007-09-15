@@ -1,11 +1,11 @@
---- erlang/lib/crypto/c_src/Makefile.in-orig	2005-05-16 20:03:56.000000000 -0700
-+++ erlang/lib/crypto/c_src/Makefile.in	2005-05-16 20:02:19.000000000 -0700
-@@ -97,7 +97,7 @@
- ifeq ($(strip $(LD_R_FLAG)),)
+--- erlang/lib/crypto/c_src/Makefile.in-orig	2007-06-11 13:59:08.000000000 +0100
++++ erlang/lib/crypto/c_src/Makefile.in	2007-09-15 21:07:32.000000000 +0100
+@@ -84,8 +84,8 @@
  LD_R_OPT =
  else
+ ifeq ($(DYNAMIC_CRYPTO_LIB),yes)
 -LD_R_OPT = $(LD_R_FLAG)$(SSL_LIBDIR)
 +LD_R_OPT = -Wl,$(LD_R_FLAG)/opt/lib
+ else
+ LD_R_OPT =
  endif
- 
- # ----------------------------------------------------
