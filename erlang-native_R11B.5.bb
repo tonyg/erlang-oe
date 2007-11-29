@@ -2,6 +2,9 @@ include erlang.inc
 
 inherit native
 
+SRC_URI += "file://erts-emulator-x86-signal-glibc-2-7.patch;patch=1 \
+	   "
+
 # EXTRA_OEMAKE = 'OTP_SMALL_BUILD=true'
 EXTRA_OECONF = '--without-ssl'
 
