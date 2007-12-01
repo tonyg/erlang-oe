@@ -50,6 +50,16 @@ do_install() {
     done
 }
 
+do_stage() {
+    EI_VSN=`cat lib/erl_interface/vsn.mk | sed -e 's:^[^0-9\.]*\([0-9\.]\+\).*$:\1:'`
+    EI_STAGING_LIBDIR=${STAGING_LIBDIR}/erlang/lib/erl_interface-${EI_VSN}
+    oe_libinstall -a -C lib/erl_interface/obj/*/ libei ${EI_STAGING_LIBDIR}/lib
+    oe_libinstall -a -C lib/erl_interface/obj/*/ libei_st ${EI_STAGING_LIBDIR}/lib
+    oe_libinstall -a -C lib/erl_interface/obj/*/ liberl_interface ${EI_STAGING_LIBDIR}/lib
+    oe_libinstall -a -C lib/erl_interface/obj/*/ liberl_interface_st ${EI_STAGING_LIBDIR}/lib
+    cp -pPR lib/erl_interface/include ${EI_STAGING_LIBDIR}
+}
+
 def get_erlang_libs(d):
     import os, bb
     install_root = bb.data.getVar('D', d, 1)
