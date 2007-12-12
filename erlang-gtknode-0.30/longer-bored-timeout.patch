@@ -1,0 +1,11 @@
+--- gtknode-0.30/src/gtknode.erl	(revision 45)
++++ gtknode-0.30/src/gtknode.erl	(working copy)
+@@ -17,7 +17,7 @@
+ 
+ -record(st,{gtk_port=[],client_pid=[],handler_pid=[],gtk_pid=[],name=[]}).
+ 
+--define(BORED, 5000).
++-define(BORED, 15000).
+ -define(LOG(T), log(process_info(self()),T)).
+ 
+ %%%-------------------------------------------------------------------

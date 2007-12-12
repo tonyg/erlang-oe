@@ -6,6 +6,8 @@ DEPENDS = "erlang-native erlang"
 
 SRC_URI = "http://gtknode.googlecode.com/files/gtknode-${PV}.tar.gz \
 	   file://erlang-gtknode-configure-cross.patch;patch=1 \
+	   file://move_g_log_set_always_fatal.patch;patch=1 \
+	   file://longer-bored-timeout.patch;patch=1 \
 	   "
 S = "${WORKDIR}/gtknode-${PV}"
 

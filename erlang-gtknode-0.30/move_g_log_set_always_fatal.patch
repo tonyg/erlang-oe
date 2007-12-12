@@ -1,0 +1,23 @@
+--- gtknode-0.30/c_src/gtknode.c	(revision 45)
++++ gtknode-0.30/c_src/gtknode.c	(working copy)
+@@ -13,10 +13,6 @@
+   GIOFunc func = gn_handle_read;
+   gpointer user_data = NULL;
+   
+-  /* exit on g_critical */
+-  g_log_set_always_fatal(G_LOG_LEVEL_CRITICAL);
+-
+-  
+   /* initialise libraries */
+   gtk_init(&argc, &argv);
+   glade_xml_get_type();
+@@ -37,6 +33,9 @@
+     return 1;
+   }
+   
++  /* exit on g_critical */
++  g_log_set_always_fatal(G_LOG_LEVEL_CRITICAL);
++
+   fd = gn_start_cnode(argv);
+   start_gtk(argc, argv, fd);
+ 
