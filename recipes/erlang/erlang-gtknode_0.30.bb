@@ -16,6 +16,11 @@ inherit autotools
 do_configure_prepend() {
 	ERLANG_STAGING_LIB_DIR=${STAGING_LIBDIR}/erlang/lib
 	export ERLANG_STAGING_LIB_DIR
+	export HOME=${OE_HOME}
+}
+
+do_compile_prepend() {
+	export HOME=${OE_HOME}
 }
 
 PACKAGES =+ "${PN}-examples"
