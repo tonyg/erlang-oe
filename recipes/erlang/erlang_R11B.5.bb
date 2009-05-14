@@ -1,7 +1,8 @@
 include erlang.inc
 DEPENDS += "erlang-native openssl"
 
-SRC_URI += "file://erts-configure.in.patch;patch=1 \
+SRC_URI += "file://erts-aclocal.m4.patch;patch=1 \
+            file://erts-configure.in.patch;patch=1 \
             file://erts-emulator-Makefile.in.patch;patch=1 \
             file://erts-etc-unix-Install.src.patch;patch=1 \
             file://lib-crypto-c_src-Makefile.in.patch;patch=1 \
@@ -9,9 +10,11 @@ SRC_URI += "file://erts-configure.in.patch;patch=1 \
             file://Makefile.in.patch;patch=1 \
             "
 
+PARALLEL_MAKE=""
+
 EXTRA_OEMAKE = "BUILD_CC='${BUILD_CC}'"
 
-EXTRA_OECONF = "--with-ssl=${STAGING_DIR}/${HOST_SYS}"
+EXTRA_OECONF = "--with-ssl=${STAGING_DIR_HOST}${layout_exec_prefix}"
 
 EXTRA_OECONF_append_arm = " --disable-smp-support --disable-hipe"
 EXTRA_OECONF_append_armeb = " --disable-smp-support --disable-hipe"
@@ -37,6 +40,7 @@ do_configure() {
 do_compile() {
     TARGET=${TARGET_SYS} \
     PATH=${NATIVE_BIN}:$PATH \
+    HOME=${OE_HOME} \
     oe_runmake noboot
 }
 
@@ -60,7 +64,7 @@ do_stage() {
     cp -pPR lib/erl_interface/include ${EI_STAGING_LIBDIR}
 }
 
-def get_erlang_libs(d):
+def get_erlang_libs_r11b5(d):
     import os, bb
     install_root = bb.data.getVar('D', d, 1)
     libdir = bb.data.getVar('libdir', d, 1)[1:]
@@ -80,5 +84,5 @@ def get_erlang_libs(d):
 PACKAGES =+ "${PN}-libs-dbg ${PN}-libs"
 
 FILES_${PN}-libs-dbg += " ${libdir}/erlang/lib/*/*/.debug ${libdir}/erlang/lib/*/*/*/.debug"
-FILES_${PN}-libs += " ${@' '.join(get_erlang_libs(d))}"
+FILES_${PN}-libs += " ${@' '.join(get_erlang_libs_r11b5(d))}"
 FILES_${PN}-dbg += " ${libdir}/erlang/bin/.debug ${libdir}/erlang/*/bin/.debug ${libdir}/erlang/lib/*/bin/.debug"

@@ -4,14 +4,12 @@ PRIORITY = "optional"
 RDEPENDS = "erlang"
 DEPENDS = "erlang-native"
 
-SRC_URI = "file:///dev/null"
-S = "${WORKDIR}/erlang-serial"
-
-do_unpack() {
-	darcs get http://www.eighty-twenty.org/~tonyg/Darcs/erlang-serial
-}
+SRC_URI = "git://github.com/tonyg/erlang-serial.git;protocol=git"
+SRCREV = "${AUTOREV}"
+S = "${WORKDIR}/git"
 
 do_compile() {
+	HOME=${OE_HOME} \
 	oe_runmake
 }
 
